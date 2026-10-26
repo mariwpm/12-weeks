@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Бронь без конфликтов</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">К содержимому</a>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#/catalog">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Бронь без конфликтов
+      </a>
+      <p class="tz-note">Время интерфейса — московское (МСК, UTC+3)</p>
+      <nav class="nav" id="nav" hidden>
+        <a href="#/catalog">Каталог</a>
+        <a href="#/my">Мои записи</a>
+        <a href="#/admin" id="adminLink" hidden>Администрирование</a>
+        <button type="button" class="linkish" id="logoutBtn">Выйти</button>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <div id="app" class="app" aria-live="polite"></div>
+  </main>
+  <footer class="foot wrap">
+    Учебный сервис бронирования компьютерных рабочих мест
+  </footer>
+  <script src="/app.js"></script>
+</body>
+</html>

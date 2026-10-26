@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: bbc
+          POSTGRES_PASSWORD: bbc_dev_password
+          POSTGRES_DB: bbc
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+
+    env:
+      DATABASE_URL: postgres://bbc:bbc_dev_password@localhost:5432/bbc
+      JWT_SECRET: ci-only-change-me
+      JWT_EXPIRES_IN: 2h
+      DEMO_USER_PASSWORD: User12345
+      DEMO_ADMIN_PASSWORD: Admin12345
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Проверка синтаксиса
+        run: npm run check
+      - name: Миграция
+        run: npm run migrate
+      - name: Seed
+        run: npm run seed
+      - name: Артефакт
+        run: |
+          mkdir -p dist
+          tar -czf dist/app.tgz --exclude=node_modules --exclude=.git --exclude=logs src public scripts package.json README.md docs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-tgz
+          path: dist/app.tgz

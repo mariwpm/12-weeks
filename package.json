@@ -1,0 +1,24 @@
+{
+  "name": "rabota-12-nedel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Учебный веб-сервис бронирования компьютерных рабочих мест «Бронь без конфликтов»",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node scripts/check.js",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node src/seed.js",
+    "backup": "node scripts/backup.js",
+    "concurrent-demo": "node scripts/concurrent-demo.js"
+  },
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
+  }
+}
