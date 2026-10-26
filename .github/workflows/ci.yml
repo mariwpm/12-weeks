@@ -47,7 +47,7 @@ jobs:
       - name: Артефакт
         run: |
           mkdir -p dist
-          tar -czf dist/app.tgz --exclude=node_modules --exclude=.git --exclude=logs src public scripts package.json README.md docs
+          tar -czf dist/app.tgz --exclude=node_modules --exclude=.git --exclude=logs src public scripts package.json README.md
       - uses: actions/upload-artifact@v4
         with:
           name: app-tgz
